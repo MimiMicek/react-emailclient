@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.20.2",
+    "mysql2": "^2.0.1",
+    "nodemon": "^2.0.0",
+    "objection": "^1.6.11"
+  },
+  "name": "react-emailclient",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migration:make": "knex migrate:make migration_name",
+    "migrate:run": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed:make": "knex seed:make",
+    "seed:run": "knex seed:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MimiMicek/react-emailclient.git"
+  },
+  "author": "Mirjana Erceg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MimiMicek/react-emailclient/issues"
+  },
+  "homepage": "https://github.com/MimiMicek/react-emailclient#readme"
+}
