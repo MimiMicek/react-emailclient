@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Navbar from './components/Navbar';
+
 
 class App extends Component {
   state = {
@@ -25,10 +30,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <p className="App-intro">{this.state.data}</p>
-      </div>
-    );
+      <Router>
+        <div className="App">
+          {console.log(this.state.data)}
+          <Navbar />
+          <div className="container">
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+          </div>
+        </div>
+        </Router>
+    );      
   }
 }
 
