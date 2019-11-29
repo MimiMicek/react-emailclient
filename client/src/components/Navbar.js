@@ -21,6 +21,11 @@ class Navbar extends Component {
                     Signup
                 </Link>
             </li>
+            <li className="nav-item">
+                <Link to="/sendemail" className="nav-link">
+                    Send email
+                </Link>
+            </li>
         </ul>        
       </nav>
     )

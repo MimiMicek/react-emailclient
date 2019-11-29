@@ -1,24 +1,23 @@
 const { Model, snakeCaseMappers } = require('objection');
 
 class User extends Model{
-    //we dont the tables and the models to have the same name
     static get tableName(){
         return 'users';
     }
 
- /*    static get relationMappings() {
-        const Address = require('./Address');
+    static get relationMappings() {
+        const Email = require('./Email');
         return {
-            addresses: {
+            emails: {
                 relation: Model.HasManyRelation,
-                modelClass: Address,
+                modelClass: Email,
                 join: {
                     from: 'users.id',
-                    to: 'addresses.userId'
+                    to: 'emails.userId'
                 }
             }
         }
-    }; */
+    };
 }
 
 

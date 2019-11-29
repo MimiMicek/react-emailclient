@@ -24,10 +24,16 @@ const authLimiter = rateLimit({
 app.use("/users/login", authLimiter);
 app.use("/users/signup", authLimiter);
 
+
 // router imports
 const usersRoute = require('./routes/usersRoute');
+const emailsRoute = require('./routes/emailsRoute');
+
+app.use("/emails/send-email", emailsRoute);
+
 
 app.use(usersRoute);
+app.use(emailsRoute);
 
 const Knex = require('knex');
 const knexConfig = require('./knexfile');
