@@ -14,7 +14,7 @@ exports.up = function(knex) {
         table.string('to');
         table.string('from');
         table.string('subject');
-        table.string('message');
+        table.string('html');
         table.timestamp('sent_at').defaultTo(knex.fn.now());
       });
      

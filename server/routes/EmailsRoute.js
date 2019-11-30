@@ -4,6 +4,7 @@ const Email = require('../models/Email');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 
+
 router.use(cors());
 
 router.get('/emails', async (req, res) => {
@@ -15,7 +16,7 @@ router.get('/emails', async (req, res) => {
 router.post('/emails/send-email', async (req, res) => {
     console.log('Send email');
     console.log(req.body);
-    if(req.body.subject && req.body.message){
+    if(req.body.subject && req.body.html){
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -26,9 +27,9 @@ router.post('/emails/send-email', async (req, res) => {
 
         const mailOptions = {
             from: 'micekemailer@gmail.com',
-            to: req.body.to, 
+            to: req.body.to,
             subject: req.body.subject,
-            message: req.body.message
+            html: req.body.html
         };
 
         const email = await Email.query().insert(mailOptions);
