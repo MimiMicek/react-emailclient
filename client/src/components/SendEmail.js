@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { sendEmail } from './UserFunctions';
-import { getEmails } from './UserFunctions';
+import { sendEmail } from './EmailFunctions';
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 
 class SendEmail extends Component {
   constructor() {
     super();
     this.state = {
-      toEmail: '',
+      to: '',
       subject: '',
-      message: '',
+      html: '',
+      emails: [],
       errors: {}
     };
 
@@ -23,18 +25,26 @@ class SendEmail extends Component {
     e.preventDefault();
 
     const newEmail = {
-      toEmail: this.state.toEmail,
+      to: this.state.to,
       subject: this.state.subject,
-      message: this.state.message
+      html: this.state.html
     };
 
     sendEmail(newEmail).then(res => {
-      this.props.history.push(`/send`);
+      this.props.history.push(`/send-email`);
     });
   }
 
+  componentDidMount() {
+    fetch("http://localhost:8080/emails")
+        .then(response => response.json())
+        .then(emails => this.setState({emails}));
+  }
+
   render() {
-    //const {emails} = this.state;
+    const {emails} = this.state;
+    console.log(emails);
+
     return (
       <div className="container">
         <div className="row">
@@ -43,13 +53,13 @@ class SendEmail extends Component {
               <h1 className="h3 mb-3 font-weight-normal">Send Email</h1>
 
               <div className="form-group">
-                <label htmlFor="toEmail">To</label>
+                <label htmlFor="to">To</label>
                 <input
-                  type="toEmail"
+                  type="to"
                   className="form-control"
-                  name="toEmail"
+                  name="to"
                   placeholder="Write email"
-                  value={this.state.toEmail}
+                  value={this.state.to}
                   onChange={this.onChange}
                 />
               </div>
@@ -67,13 +77,13 @@ class SendEmail extends Component {
               </div>
               
               <div className="form-group">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="html">Message</label>
                 <input
-                  type="message"
+                  type="html"
                   className="form-control"
-                  name="message"
+                  name="html"
                   placeholder="Type some message"
-                  value={this.state.message}
+                  value={this.state.html}
                   onChange={this.onChange}
                 />
               </div>
@@ -84,31 +94,50 @@ class SendEmail extends Component {
                 Send
               </button>
             </form>
-            <div>
-                 {/*  <table>
-                <tbody>
-                    <tr>
-                        <th>To</th>
-                        <th>Subject</th>
-                        <th>Timestamp</th>
-                    </tr>
-                     { emails.map((email, index) => {
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6 mt-5 mx-auto">
+            {/*    <table>
+                    <tbody>
+                        <tr>
+                            <th>To</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                        </tr>
+                        { emails.map((email, index) => {
                             return (
-                                <tr key={"cityrow" + index}>
-                                    <td>{city.City}</td>
-                                    <td>{city.State}</td>
-                                    <td>{city.District}</td>
-                                </tr>
+                              <tr key={"emailrow" + index}>
+                                  <td>{email.to}</td>
+                                  <td>{email.subject}</td>
+                                  <td>{email.html}</td>
+                              </tr>
                             )
                         })}
                     </tbody>
-                </table> */}
+                  </table> */}
+              <ReactTable 
+                    columns={[
+                        {
+                            Header: "To",
+                            accessor: "to"
+                        },
+                        {
+                            Header: "subject",
+                            accessor: "subject"
+                        },
+                        {
+                            Header: "Message",
+                            accessor: "html"
+                        }
+                    ]}
+                    data={this.state.emails}
+                />
             </div>
-          </div>
         </div>
       </div>
     )
   }
 }
 
-export default Signup;
+export default SendEmail;

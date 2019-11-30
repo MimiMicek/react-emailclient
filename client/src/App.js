@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
+import SendEmail from './components/SendEmail';
+
 
 
 class App extends Component {
@@ -12,12 +14,10 @@ class App extends Component {
     };
 
   componentDidMount() {
-      // Call our fetch function below once the component mounts
     this.callBackendAPI()
       .then(res => this.setState({ data: res.express }))
       .catch(err => console.log(err));
   }
-    // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
     const response = await fetch('/backend');
     const body = await response.json();
@@ -37,6 +37,7 @@ class App extends Component {
           <div className="container">
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/send-email" component={SendEmail} />
           </div>
         </div>
         </Router>

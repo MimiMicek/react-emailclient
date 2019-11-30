@@ -22,7 +22,7 @@ class Navbar extends Component {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/sendemail" className="nav-link">
+                <Link to="/send-email" className="nav-link">
                     Send email
                 </Link>
             </li>
